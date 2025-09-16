@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plano de Saúde Invisível — Raciocinando como Médico • Administração das Doenças • Economia das Doenças</title>
+  <meta name="description" content="Três cursos que unem Medicina, Administração e Economia das Doenças para famílias que querem proteger a saúde com pouco dinheiro — mesmo sem plano de saúde." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b1220;          /* Navy night */
+      --bg-2:#0f192e;         /* Deeper card */
+      --text:#e8ecf5;         /* Light text */
+      --muted:#9fb2d9;        /* Muted text */
+      --gold:#d6b25e;         /* Premium gold */
+      --gold-2:#f0d98b;       /* Lighter gold */
+      --accent:#4da3ff;       /* Sapphire */
+      --ok:#2ecc71;           /* Success */
+      --danger:#ff7a7a;       /* Accent red */
+      --radius:18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --maxw: 1180px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      background: radial-gradient(1200px 800px at 70% -10%, #1c2a4f 0%, transparent 60%),
+                  radial-gradient(800px 600px at -10% 10%, #13264a 0%, transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.6; overflow-x:hidden;
+    }
+    a{color:var(--gold)}
+    img{max-width:100%; display:block}
+    .container{width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px}
+    header{position:sticky; top:0; z-index:30; backdrop-filter:saturate(140%) blur(8px); background:rgba(11,18,32,.6); border-bottom:1px solid rgba(214,178,94,.18)}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.3px}
+    .brand .logo{width:40px; height:40px; border-radius:12px; background:linear-gradient(145deg, var(--gold), var(--gold-2)); box-shadow:0 6px 20px rgba(214,178,94,.35); position:relative}
+    .brand .logo:after{content:""; position:absolute; inset:4px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,.3), rgba(255,255,255,0)); mix-blend:overlay}
+    .brand span{font-size:1.05rem}
+    .nav-links{display:flex; gap:18px; align-items:center}
+    .nav-links a{font-weight:600; text-decoration:none; color:var(--text); opacity:.9}
+    .nav-links a:hover{color:var(--gold)}
+    .mobile-toggle{display:none}
+
+    .btn{appearance:none; border:none; cursor:pointer; text-decoration:none; font-weight:800; letter-spacing:.2px; padding:14px 22px; border-radius:14px; transition:transform .06s ease, box-shadow .2s ease, background .2s ease}
+    .btn-primary{background:linear-gradient(135deg, var(--gold), var(--gold-2)); color:#1a1202; box-shadow:0 10px 24px rgba(214,178,94,.28)}
+    .btn-primary:hover{transform:translateY(-1px)}
+    .btn-ghost{background:transparent; border:1px solid rgba(214,178,94,.35); color:var(--gold-2)}
+    .btn-ghost:hover{background:rgba(214,178,94,.1)}
+    .btn-accent{background:linear-gradient(135deg, var(--accent), #78bbff); color:#09142a; box-shadow:0 10px 24px rgba(77,163,255,.28)}
+
+    .hero{padding:72px 0 40px; position:relative}
+    .hero .wrap{display:grid; grid-template-columns:1.2fr 1fr; gap:40px; align-items:center}
+    .eyebrow{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; background:rgba(77,163,255,.1); color:#cfe3ff; border:1px solid rgba(77,163,255,.2); font-weight:700; font-size:.85rem}
+    h1{font-size: clamp(2rem, 4vw, 3.4rem); line-height:1.1; margin:16px 0 12px}
+    .lead{font-size: clamp(1rem, 1.6vw, 1.25rem); color:var(--muted)}
+    .hero-cta{display:flex; gap:14px; flex-wrap:wrap; margin-top:22px}
+    .score{display:flex; gap:22px; margin-top:18px; color:var(--muted); font-size:.95rem}
+    .score b{color:var(--gold-2)}
+    .glass{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow); border-radius:var(--radius)}
+    .card{padding:22px}
+
+    .hero-art{position:relative}
+    .hero-art .panel{position:relative; padding:18px; border-radius:18px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); box-shadow:var(--shadow)}
+    .hero-art .panel + .panel{margin-top:16px}
+    .tag{display:inline-flex; gap:8px; align-items:center; font-weight:700; font-size:.82rem; color:#0f192e; background:linear-gradient(135deg, var(--gold), var(--gold-2)); padding:6px 10px; border-radius:999px}
+
+    section{padding:72px 0}
+    section .title{font-size: clamp(1.6rem, 3.2vw, 2.4rem); margin:0 0 12px}
+    .subtitle{color:var(--muted); margin-bottom:26px}
+
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+    .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:20px}
+
+    .feature{padding:20px; border-radius:18px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10)}
+    .feature h3{margin:8px 0 6px}
+    .feature p{color:var(--muted)}
+
+    .course{display:flex; flex-direction:column; gap:14px; padding:22px; border-radius:18px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10)}
+    .course h3{margin:0}
+    .badges{display:flex; flex-wrap:wrap; gap:8px}
+    .badge{font-size:.78rem; font-weight:700; color:#0d182b; background:linear-gradient(135deg, var(--gold), var(--gold-2)); padding:6px 10px; border-radius:999px}
+    .list{margin:0; padding-left:18px; color:var(--muted)}
+    .list li{margin:6px 0}
+
+    .pricing{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+    .price-card{padding:26px; border-radius:22px; border:1px solid rgba(214,178,94,.25); background:linear-gradient(180deg, rgba(214,178,94,.08), rgba(255,255,255,.02))}
+    .price-card.featured{border:1px solid rgba(214,178,94,.55); background:linear-gradient(180deg, rgba(214,178,94,.14), rgba(255,255,255,.03)); box-shadow:0 20px 50px rgba(214,178,94,.18)}
+    .price{font-size:2rem; font-weight:900}
+    .per{font-weight:600; color:var(--muted); font-size:.92rem}
+
+    .testi{display:flex; flex-direction:column; gap:16px}
+    .quote{padding:18px; border-left:4px solid var(--gold); background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border-radius:12px}
+
+    .faq details{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:16px}
+    .faq details + details{margin-top:10px}
+    .faq summary{cursor:pointer; font-weight:800}
+
+    footer{padding:40px 0; border-top:1px solid rgba(255,255,255,.08); color:var(--muted)}
+
+    .ribbon{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:999px; border:1px dashed rgba(214,178,94,.45); background:rgba(214,178,94,.08); color:var(--gold-2); font-weight:800}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04)}
+
+    .price-toggle{display:flex; align-items:center; gap:10px}
+    .switch{position:relative; display:inline-block; width:52px; height:30px}
+    .switch input{opacity:0; width:0; height:0}
+    .slider{position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:#223151; transition:.2s; border-radius:999px}
+    .slider:before{position:absolute; content:""; height:22px; width:22px; left:4px; top:4px; background:white; transition:.2s; border-radius:50%}
+    input:checked + .slider{background:#2c7bff}
+    input:checked + .slider:before{transform:translateX(22px)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero .wrap{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .mobile-toggle{display:block}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>Plano de Saúde Invisível</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#cursos">Cursos</a>
+        <a href="#combos">Combos</a>
+        <a href="#precos">Preços</a>
+        <a href="#faq">FAQ</a>
+        <a href="#inscricao" class="btn btn-primary">Quero meu acesso</a>
+      </nav>
+      <button class="mobile-toggle btn btn-ghost" onclick="toggleMenu()">Menu</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container wrap">
+        <div>
+          <span class="eyebrow">Saúde acessível • Sem mensalidade</span>
+          <h1>Seu <span style="color:var(--gold-2)">Plano de Saúde Invisível</span>: proteja sua família com <em>Raciocínio Médico</em>, <em>Administração</em> e <em>Economia das Doenças</em>.</h1>
+          <p class="lead">Três cursos práticos e poderosos para quem não tem plano de saúde (ou quer depender menos dele). Decida melhor, gaste menos, viva mais.</p>
+          <div class="hero-cta">
+            <a href="#precos" class="btn btn-primary">🔥 Quero meu acesso agora</a>
+            <a href="https://wa.me/5591980144854?text=Quero%20saber%20mais%20sobre%20o%20Plano%20de%20Sa%C3%BAde%20Invis%C3%ADvel" class="btn btn-ghost">Falar no WhatsApp</a>
+          </div>
+          <div class="score">
+            <span class="pill">Acesso vitalício</span>
+            <span class="pill">Garantia 7 dias</span>
+            <span class="pill">Certificado</span>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="panel">
+            <div class="tag">Economize em exames</div>
+            <p class="muted">Entenda quando um exame muda conduta — e quando não — para evitar desperdícios.</p>
+          </div>
+          <div class="panel">
+            <div class="tag">Administre doenças como projetos</div>
+            <p class="muted">Use planos semanais, checklists e metas realistas para crônicos e idosos.</p>
+          </div>
+          <div class="panel">
+            <div class="tag">Decisão clínica custo‑efetiva</div>
+            <p class="muted">Aprenda frameworks simples para decidir junto com seu médico e reduzir assimetrias.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="problema">
+      <div class="container">
+        <h2 class="title">O problema real</h2>
+        <p class="subtitle">Planos caros, contas inesperadas, decisões confusas. A solução começa com conhecimento aplicável e estratégia.</p>
+        <div class="grid-3">
+          <div class="feature glass">
+            <h3>Sem mensalidade</h3>
+            <p>Você cria um “plano de saúde” baseado em decisões inteligentes — pague apenas quando precisar, com previsibilidade.</p>
+          </div>
+          <div class="feature glass">
+            <h3>Menos assimetria</h3>
+            <p>Peças clínico‑econômicas e linguagem clara para decidir melhor com o médico e com a família.</p>
+          </div>
+          <div class="feature glass">
+            <h3>Economia concreta</h3>
+            <p>Frameworks para reduzir custos em consultas, exames, medicamentos e internações sem perder qualidade.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cursos">
+      <div class="container">
+        <h2 class="title">Os 3 cursos</h2>
+        <p class="subtitle">Estude separado ou combine para ter o pacote completo.</p>
+        <div class="grid-3">
+          <article class="course">
+            <div class="badges"><span class="badge">Curso 1</span></div>
+            <h3>Raciocinando como Médico</h3>
+            <p>O raciocínio clínico essencial — sem jargões — para decidir com segurança.</p>
+            <ul class="list">
+              <li>Como interpretar sintomas e priorizar hipóteses</li>
+              <li>Exames: quando mudam conduta (e quando não)</li>
+              <li>Peças psicoeconômicas & clínico‑econômicas</li>
+              <li>Conversas difíceis e decisões compartilhadas</li>
+            </ul>
+            <a href="#precos" class="btn btn-accent">Quero este curso</a>
+          </article>
+
+          <article class="course">
+            <div class="badges"><span class="badge">Curso 2</span></div>
+            <h3>Administração das Doenças</h3>
+            <p>Transforme a saúde da família em um projeto bem gerido.</p>
+            <ul class="list">
+              <li>Planejamento de crônicos e idosos</li>
+              <li>Checklists semanais, metas e indicadores</li>
+              <li>Vetores neuroeconômicos aplicados à saúde</li>
+              <li>Rotinas de prevenção com baixo custo</li>
+            </ul>
+            <a href="#precos" class="btn btn-accent">Quero este curso</a>
+          </article>
+
+          <article class="course">
+            <div class="badges"><span class="badge">Curso 3</span></div>
+            <h3>Economia das Doenças</h3>
+            <p>Entenda custos, trade‑offs e escolhas intertemporais que salvam dinheiro e vidas.</p>
+            <ul class="list">
+              <li>AVC como modelo replicável para outras doenças</li>
+              <li>Efeito substituição, utilidade e orçamento em saúde</li>
+              <li>Teoria dos jogos: pacientes, médicos, convênios</li>
+              <li>Economia ambiental aplicada à saúde</li>
+            </ul>
+            <a href="#precos" class="btn btn-accent">Quero este curso</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="combos">
+      <div class="container">
+        <div class="ribbon">💎 Combos exclusivos com condições especiais</div>
+        <h2 class="title" style="margin-top:12px">Combos que viram um plano</h2>
+        <p class="subtitle">Escolha 2 cursos ou o pacote completo — o verdadeiro “Plano de Saúde Invisível”.</p>
+        <div class="grid-2">
+          <div class="feature">
+            <h3>Combo 2 cursos</h3>
+            <p>Monte seu duo perfeito (ex.: Raciocínio + Administração) para cuidadores e famílias.</p>
+            <a href="#precos" class="btn btn-primary">Ver oferta</a>
+          </div>
+          <div class="feature">
+            <h3>Combo 3 cursos (Completo)</h3>
+            <p>O pacote definitivo: raciocínio clínico + gestão + economia aplicada. Bônus e materiais extras.</p>
+            <a href="#precos" class="btn btn-primary">Quero o completo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios">
+      <div class="container">
+        <h2 class="title">Benefícios que importam</h2>
+        <div class="grid-3">
+          <div class="feature"><h3>Decisões seguras</h3><p>Reduza erros comuns e converse melhor com seu médico.</p></div>
+          <div class="feature"><h3>Economia real</h3><p>Evite exames e tratamentos de baixo valor e foque no que importa.</p></div>
+          <div class="feature"><h3>Aplicação imediata</h3><p>Ferramentas prontas para usar com sua família hoje.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="prova" class="testi">
+      <div class="container">
+        <h2 class="title">Quem está por trás</h2>
+        <p class="subtitle">Dr. Claudio Cutrim — Médico, Engenheiro e Pesquisador em Neuroeconomia & Economia Anti‑Assimétrica. Criador da Economia das Doenças.</p>
+        <div class="grid-2">
+          <div class="quote">“Organizei os cuidados da minha mãe com checklists e reduzi mais de R$ 4.000 em exames desnecessários.” — <b>Maria S.</b></div>
+          <div class="quote">“O combo completo virou nosso plano de saúde alternativo. Estamos mais tranquilos e gastando menos.” — <b>João P.</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="precos">
+      <div class="container">
+        <div class="grid-2" style="align-items:center; margin-bottom:18px">
+          <h2 class="title" style="margin:0">Preços e inscrição</h2>
+          <div class="price-toggle" style="justify-self:end">
+            <span>R$</span>
+            <label class="switch">
+              <input id="currencySwitch" type="checkbox" onchange="toggleCurrency()">
+              <span class="slider"></span>
+            </label>
+            <span>US$</span>
+          </div>
+        </div>
+        <p class="subtitle">Acesso vitalício • Atualizações incluídas • Garantia incondicional de 7 dias</p>
+        <div class="pricing" id="plans">
+          <div class="price-card">
+            <h3>Curso Individual</h3>
+            <p class="price" data-brl="R$ 997" data-usd="US$ 197">R$ 997</p>
+            <p class="per">Escolha 1: Raciocínio Médico • Administração • Economia</p>
+            <a href="#inscricao" class="btn btn-primary">Quero este</a>
+          </div>
+          <div class="price-card featured">
+            <h3>Combo 2 Cursos</h3>
+            <p class="price" data-brl="R$ 1.497" data-usd="US$ 297">R$ 1.497</p>
+            <p class="per">Monte seu duo ideal — melhor custo/benefício</p>
+            <a href="#inscricao" class="btn btn-primary">Garantir agora</a>
+          </div>
+          <div class="price-card">
+            <h3>Combo 3 Cursos (Completo)</h3>
+            <p class="price" data-brl="R$ 2.497" data-usd="US$ 497">R$ 2.497</p>
+            <p class="per">O Plano de Saúde Invisível — pacote total</p>
+            <a href="#inscricao" class="btn btn-primary">Quero o completo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="container">
+        <h2 class="title">Perguntas frequentes</h2>
+        <details>
+          <summary>Preciso ser da área da saúde?</summary>
+          <p>Não. O conteúdo é pensado para leigos, cuidadores, famílias e profissionais que desejam pensar diferente.</p>
+        </details>
+        <details>
+          <summary>Funciona no Brasil e nos EUA?</summary>
+          <p>Sim. Os frameworks são universais (decisão clínica, administração e economia). Exemplos práticos para diferentes realidades.</p>
+        </details>
+        <details>
+          <summary>Quanto tempo dura?</summary>
+          <p>Cada curso pode ser concluído em 6–8 semanas em ritmo leve. O acesso é vitalício, com atualizações.</p>
+        </details>
+        <details>
+          <summary>Tem garantia?</summary>
+          <p>Garantia de 7 dias, incondicional. Se não for para você, devolvemos 100%.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="inscricao">
+      <div class="container">
+        <div class="grid-2">
+          <div class="glass card">
+            <h2 class="title" style="margin:0 0 8px">Como se inscrever</h2>
+            <ol class="list">
+              <li>Escolha seu plano (1 curso, combo 2 ou combo 3).</li>
+              <li>Finalize o pagamento de forma segura (Pix ou Cartão).</li>
+              <li>Receba acesso imediato à área do aluno.</li>
+            </ol>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px">
+              <a class="btn btn-primary" href="#precos">Escolher plano</a>
+              <a class="btn btn-ghost" href="mailto:nexialbusiness@proton.me">Dúvidas por e‑mail</a>
+              <a class="btn btn-ghost" href="https://wa.me/5591980144854?text=Tenho%20d%C3%BAvidas%20sobre%20o%20Plano%20de%20Sa%C3%BAde%20Invis%C3%ADvel">Falar no WhatsApp</a>
+            </div>
+          </div>
+          <div class="glass card">
+            <h3 style="margin:0 0 8px">Pagamento</h3>
+            <p class="muted">Integração com seu checkout favorito (Hotmart, Eduzz ou pagamento direto). Este bloco é um placeholder — basta apontar os botões para seus links de pagamento.</p>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px">
+              <a class="btn btn-primary" href="#">Pagar com Pix</a>
+              <a class="btn btn-accent" href="#">Pagar com Cartão</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex; flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between">
+        <div>
+          <div class="brand"><div class="logo"></div><span>Cerebral.top • NexialBusiness</span></div>
+          <p style="margin:.4rem 0 0">Contato: <a href="mailto:nexialbusiness@proton.me">nexialbusiness@proton.me</a> • WhatsApp: <a href="https://wa.me/5591980144854">(91) 98014‑4854</a></p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn btn-ghost" href="#faq">FAQ</a>
+          <a class="btn btn-ghost" href="#precos">Inscrição</a>
+          <a class="btn btn-ghost" href="#">Política de Privacidade</a>
+        </div>
+      </div>
+      <p style="margin-top:14px; font-size:.9rem">© <span id="yr"></span> Plano de Saúde Invisível. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu(){
+      const nav = document.querySelector('.nav-links');
+      if(!nav) return; nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+      nav.style.flexDirection = 'column'; nav.style.background = 'rgba(11,18,32,.95)'; nav.style.position='absolute'; nav.style.top='60px'; nav.style.right='20px'; nav.style.padding='16px'; nav.style.borderRadius='14px'; nav.style.border='1px solid rgba(255,255,255,.12)';
+    }
+    function toggleCurrency(){
+      const checked = document.getElementById('currencySwitch').checked;
+      document.querySelectorAll('.price').forEach(p=>{
+        const brl = p.getAttribute('data-brl');
+        const usd = p.getAttribute('data-usd');
+        p.textContent = checked ? usd : brl;
+      })
+    }
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
